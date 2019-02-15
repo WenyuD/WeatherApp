@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFADA0;
+    font-family: sans-serif;
+    color: #352B4A;
+}
+
+.location, .temperature-section {
+    height: 30vh;
+    min-height: 120px;
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.temperature-section {
+    flex-direction: column;
+}
+
+.location-timezone {
+    font-size: 3em;
+}
+.degree-section {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.degree-section span {
+    font-size: 2em;
+}
+.degree-section h2 {
+    font-size: 2em;
+}
+.icon {
+    height: 5em;
+}
+.temperature-description {
+    font-size: 1em;
+}
+
+@media only screen and (max-width: 630px) {
+    .location-timezone {
+        font-size: 1.7em;
+    }
+    .degree-section span {
+        font-size: 1.5em;
+    }
+    .degree-section h2 {
+        font-size: 1.5em;
+    }
+    .icon {
+        height: 3.5em;
+    }
+    .temperature-description {
+        font-size: 1em;
+    }
+}
+@media only screen and (max-width: 430px) {
+    .location-timezone {
+        font-size: 1.2em;
+    }
+    .degree-section span {
+        font-size: 1em;
+    }
+    .degree-section h2 {
+        font-size: 1em;
+    }
+    .icon {
+        height: 2em;
+    }
+    .temperature-description {
+        font-size: 0.7em;
+    }
+}
