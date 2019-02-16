@@ -31,7 +31,6 @@ window.addEventListener('load', ()=> {
                     //Set DOM Elements from the API
                     temperatureDegree.textContent = temperature;
                     temperatureDescription.textContent = summary;
-                    locationTimezone.textContent = data.timezone;
                     //Formula for Celsius
                     let celsius = (temperature - 32) * (5 / 9);
 
@@ -56,11 +55,11 @@ window.addEventListener('load', ()=> {
                     return response.json();
                 })
                 .then(cityName => {
-                    // console.log(cityName);
+                    console.log(cityName);
                     const {formatted_address} = cityName.results;
                     
                     //Set DOM Elements from the API
-                    locationTimezone.textContent = cityName.formatted_address;
+                    locationTimezone.textContent = formatted_address;
                 })
         });
 
