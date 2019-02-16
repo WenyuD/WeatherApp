@@ -51,11 +51,10 @@ window.addEventListener('load', ()=> {
                     console.log(temperatureSpan.textContent);
                 })
             fetch(GoogleApi)
-                .then(response =>{
-                    return response.json();
+                .then(responseCity =>{
+                    return responseCity.json();
                 })
                 .then(cityName => {
-                    console.log(cityName);
                     const {formatted_address} = cityName.results;
                     
                     //Set DOM Elements from the API
