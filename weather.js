@@ -55,7 +55,7 @@ window.addEventListener('load', ()=> {
                     return responseCity.json();
                 })
                 .then(cityName => {
-                    const {formatted_address} = cityName.results;
+                    const {formatted_address} = cityName.results[0];
                     
                     //Set DOM Elements from the API
                     locationTimezone.textContent = formatted_address;
