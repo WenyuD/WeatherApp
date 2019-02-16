@@ -4,16 +4,20 @@ window.addEventListener('load', ()=> {
     let temperatureDescription = document.querySelector('.temperature-description');
     let temperatureDegree = document.querySelector('.temperature-degree');
     let locationTimezone = document.querySelector('.location-timezone');
-    let temperatureSection = document.querySelector('.temperature-section');
-    const temperatureSpan = document.querySelector('.temperature-section span')
+    let degreeSection = document.querySelector('.degree-section');
+    let alert = document.querySelector('.alert');
+    const temperatureSpan = document.querySelector('.temperature-section span');
 
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
             long = position.coords.longitude;
             lat = position.coords.latitude;
+            alert.textContent = "";
 
             const proxy = "https://cors-anywhere.herokuapp.com/";
             const api = `${proxy}https://api.darksky.net/forecast/4ee3ec5fc9565d3b10bfbc4a56dd6073/${lat},${long}`;
+            const GoogleApi = `${proxy}https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&location_type=APPROXIMATE&result_type=locality&key=AIzaSyDRKPPmc5aNaAA562fVLMpduAHrf8MzF24`;
+            console.log(api);
 
             
             fetch(api)
@@ -21,7 +25,7 @@ window.addEventListener('load', ()=> {
                     return response.json();
                 })
                 .then(data => {
-                    // console.log(data);
+                    console.log(data);
                     const {temperature,summary, icon} = data.currently;
                     
                     //Set DOM Elements from the API
@@ -36,7 +40,7 @@ window.addEventListener('load', ()=> {
 
                     //Change Unit to Celcius/Farenheit
                     temperatureSpan.textContent = "°F";
-                    temperatureSection.addEventListener('click', () => {
+                    degreeSection.addEventListener('click', () => {
                         if(temperatureSpan.textContent === "°F") {
                             temperatureSpan.textContent = "°C";
                             temperatureDegree.textContent = celsius.toFixed(2);
@@ -47,15 +51,23 @@ window.addEventListener('load', ()=> {
                     })
                     console.log(temperatureSpan.textContent);
                 })
+            fetch(GoogleApi)
+                .then(response =>{
+                    return response.json();
+                })
+                .then(cityName => {
+                    // console.log(cityName);
+                    const {formatted_address} = cityName.results;
+                    
+                    //Set DOM Elements from the API
+                    locationTimezone.textContent = cityName.formatted_address;
+                })
         });
 
     }
-    else {
-        h1.textContent = "Please enable the navigation so we can provide accurate weather information for you."
-    }
 
     function setIcons(icon, iconID) {
-        const skycons = new Skycons({color: "#352B4A"});
+        const skycons = new Skycons({color: "#FFADA0"});
         const currentIcon = icon.replace(/-/g, "_").toUpperCase();
         skycons.play();
         return skycons.set(iconID, Skycons[currentIcon]);
