@@ -1,18 +1,36 @@
 window.addEventListener('load', ()=> {
     let long;
     let lat;
-    let temperatureDescription = document.querySelector('.temperature-description');
-    let temperatureDegree = document.querySelector('.temperature-degree');
-    let locationTimezone = document.querySelector('.location-timezone');
-    let degreeSection = document.querySelector('.degree-section');
     let alert = document.querySelector('.alert');
+
+    let currentInfo = document.querySelector('.current-info');
+    let temperatureDescription = document.querySelector('.temperature-description');
+    let location = document.querySelector('.location');
+    let degreeSection = document.querySelector('.degree-section');
+    let temperatureDegree = document.querySelector('.temperature-degree');
     const temperatureSpan = document.querySelector('.temperature-section span');
+
+    let details = document.querySelector('.details');
+    let cloudCoverSpan = document.querySelector('.cloudCover span');
+    let humiditySpan = document.querySelector('.humidity span');
+    let ozoneSpan = document.querySelector('.ozone span');
+    let pressureSpan = document.querySelector('.pressure span');
+    let uvIndexSpan = document.querySelector('.uvIndex span');
+    let visibilitySpan = document.querySelector('.visibility span');
+    let windSpeedSpan = document.querySelector('.windSpeed span');
+
+    let hourlySummary = document.querySelector('.hourly-summary');
+    let dailySummary = document.querySelector('.daily-summary');
+    console.log(window.innerWidth);
+
 
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
             long = position.coords.longitude;
             lat = position.coords.latitude;
             alert.textContent = "";
+            currentInfo.classList.add('current-info-show');
+            details.classList.add('details-show');
 
             const proxy = "https://cors-anywhere.herokuapp.com/";
             const api = `${proxy}https://api.darksky.net/forecast/4ee3ec5fc9565d3b10bfbc4a56dd6073/${lat},${long}`;
@@ -26,10 +44,13 @@ window.addEventListener('load', ()=> {
                 })
                 .then(data => {
                     console.log(data);
-                    const {temperature,summary, icon} = data.currently;
-                    
+                    const {temperature, summary, icon, cloudCover, humidity, ozone, pressure, uvIndex, visibility, windSpeed} = data.currently;
+                    let nextHourSummary = data.hourly.summary;
+                    let nextDaySummary = data.daily.summary;
+
+                    //General Infomaton
                     //Set DOM Elements from the API
-                    temperatureDegree.textContent = temperature;
+                    temperatureDegree.textContent = Math.round(temperature);
                     temperatureDescription.textContent = summary;
                     //Formula for Celsius
                     let celsius = (temperature - 32) * (5 / 9);
@@ -42,13 +63,27 @@ window.addEventListener('load', ()=> {
                     degreeSection.addEventListener('click', () => {
                         if(temperatureSpan.textContent === "°F") {
                             temperatureSpan.textContent = "°C";
-                            temperatureDegree.textContent = celsius.toFixed(2);
+                            temperatureDegree.textContent = Math.round(celsius);
                         } else {
                             temperatureSpan.textContent = "°F";
-                            temperatureDegree.textContent = temperature;
+                            temperatureDegree.textContent = Math.round(temperature);
                         }
                     })
                     console.log(temperatureSpan.textContent);
+
+                    //Details
+                    //Current Details
+                    cloudCoverSpan.textContent = cloudCover;
+                    humiditySpan.textContent = humidity;
+                    ozoneSpan.textContent = ozone;
+                    pressureSpan.textContent = pressure;
+                    uvIndexSpan.textContent = uvIndex;
+                    visibilitySpan.textContent = visibility;
+                    windSpeedSpan.textContent = windSpeed;
+                    
+                    //Next Hour Details
+                    hourlySummary.textContent = nextHourSummary;
+                    dailySummary.textContent = nextDaySummary;
                 })
             fetch(GoogleApi)
                 .then(responseCity =>{
@@ -58,7 +93,7 @@ window.addEventListener('load', ()=> {
                     const {formatted_address} = cityName.results[0];
                     
                     //Set DOM Elements from the API
-                    locationTimezone.textContent = formatted_address;
+                    location.textContent = formatted_address;
                 })
         });
 

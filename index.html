@@ -8,21 +8,46 @@
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="weather.js"></script>
     <script type="text/javascript" src="skycons.js"></script>
-	<title>Weather App</title>
+	<title>PurpleDay | Weather App</title>
 </head>
 
 <body>
-    <h1 class="alert">Please enable the navigation so we can provide accurate weather information for you.</h1>
-    <div class="location">
-        <h1 class="location-timezone"></h1>
-        <canvas class="icon">Icon</canvas>
+    <div class="alert">
+        <h1>Please enable the navigation so we can provide accurate weather information for you.</h1>
     </div>
-    <div class="temperature-section">
-        <div class="degree-section">
-            <h2 class="temperature-degree"></h2>
-            <span></span>
+    <div class="weather-container">
+        <div class="current-info">
+            <h1 class="location"></h1>
+            <canvas class="icon">Icon</canvas>
+            <div class="temperature-section">
+                <div class="degree-section">
+                    <h2 class="temperature-degree"></h2>
+                    <span></span>
+                </div>
+                <h2 class="temperature-description"></h2>
+            </div>
         </div>
-        <h2 class="temperature-description"></h2>
+        <div class="details">
+            <h2 class="details-title">Weather Details</h2>
+            <div class="current-details">
+                <h3 class="current-details-title">Current</h3>
+                <p class="cloudCover">Cloud Cover: <span></span></p>
+                <p class="humidity">Humidity: <span></span></p>
+                <p class="ozone">Ozone: <span></span></p>
+                <p class="pressure">Pressure: <span></span></p>
+                <p class="uvIndex">UV Index: <span></span></p>
+                <p class="visibility">Visibility: <span></span></p>
+                <p class="windSpeed">Wind Speed: <span></span></p>
+            </div>
+            <div class="hourly">
+                <h3 class="hourly-title">In the next hour</h3>
+                <p class="hourly-summary"></p>
+            </div>
+            <div class="daily">
+                <h3 class="daily-title">In the next day</h3>
+                <p class="daily-summary"></p>
+            </div>
+        </div>
     </div>
 </body>
 

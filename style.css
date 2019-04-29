@@ -15,59 +15,109 @@ body {
     font-family: sans-serif;
     color: #FFADA0;
 }
-.alert {
-    width: 70%;
-    align-items: center;
-    justify-content: center;
-}
+    .alert {
+        height: 100vh;
+        width: 100%;
+        top: 0;
+        left: 0;
+        justify-content: center;
+        display: flex;
+        background-color: #352B4A;
+    }
+        .alert h1 {
+            width: 70%;
+            margin-top: 10%;
+        }
+    .alert-hidden {
+        opacity: 0;
+    }
 
-.location, .temperature-section {
-    height: 30vh;
-    min-height: 120px;
-    width: 50%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-.temperature-section {
-    flex-direction: column;
-}
+    .current-info {
+        position: fixed;
+        opacity: 0;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        background-color: antiquewhite;
+    }
+        .location {
+            font-size: 1.8rem;
+        }
+        .icon {
+            display: inline-block;
+            height: 4rem;
+            margin: 2rem;
+        }
+    .current-info-show {
+        opacity: 1;
+    }
 
-.location-timezone {
-    font-size: 3em;
-}
-.degree-section {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    color: #E0FFE8;
-}
-.degree-section span {
-    font-size: 2em;
-}
-.degree-section h2 {
-    font-size: 2em;
-}
-.icon {
-    height: 5em;
-}
-/* .temperature-description {
-    font-size: 1em;
-} */
+        .temperature-section {
+            position: relative;
+        }
+            .degree-section {
+                cursor: pointer;
+                flex-direction: row;
+                text-align: center;
+            }
+                .temperature-degree {
+                    display: inline-block;
+                    font-size: 1.5rem;
+                }
+                .temperature-section span {
+                    font-size: 1.5rem;
+                }
+            .temperature-description {
+                font-size: 1.2rem;
+                margin: 1rem;
+            }
+    
+    .details {
+        position: absolute;
+        overflow-y: scroll;
+        opacity: 0;
+        right: 0;
+        top: 0;
+        width: 50%;
+        height: auto;
+        min-height: 100vh;
+        padding: 2rem 2rem 4rem 2rem;
+        color: rgb(72, 60, 100);
+        background-color: #FFADA0;
+    }
+        .details-title {
+            margin: 2rem;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        .details > div {
+            margin: 1rem;
+            font-size: 1.1rem;
+        }
+            .current-details > p {
+                margin: 1.5rem;
+                font-size: 1rem;
+            }
+            .hourly p {
+                margin: 1.5rem 0 1.5rem 1.5rem;
+                font-size: 1rem;
+            }
+            .daily p {
+                margin: 1.5rem 0 1.5rem 1.5rem;
+                font-size: 1rem;
+            }
 
-@media only screen and (max-width: 630px) {
-    .location-timezone {
-        font-size: 1.7em;
+    .details-show {
+        opacity: 1;
     }
-    .degree-section span {
-        font-size: 1.5em;
-    }
-    .degree-section h2 {
-        font-size: 1.5em;
-    }
-    .icon {
-        height: 3.5em;
-    }
+
+
+@media only screen and (max-width: 1000px) {
 }
 @media only screen and (max-width: 430px) {
     .location-timezone {
