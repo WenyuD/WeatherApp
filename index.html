@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="weather.js"></script>
     <script type="text/javascript" src="skycons.js"></script>
-	<title>PurpleDay | Weather App</title>
+    <script type="text/javascript" src="animation.js"></script>
+    <title>PurpleDay | Weather App</title>
 </head>
 
 <body>
@@ -47,6 +48,12 @@
                 <h3 class="daily-title">In the next day</h3>
                 <p class="daily-summary"></p>
             </div>
+
+        </div>
+        <div class="hint">
+            <p>Hi there, welcome to PurpleDay! If you don't like temperature in °F, just click the unit and it will
+                switch to °C.</p>
+            <p class="gotIt" onclick="closeGotIt()">Got it!</p>
         </div>
     </div>
 </body>

@@ -6,7 +6,7 @@
 
 body {
     height: 100vh;
-    min-height: 300px;
+    min-height: 400px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -16,6 +16,7 @@ body {
     color: #FFADA0;
 }
     .alert {
+        position: absolute;
         height: 100vh;
         width: 100%;
         top: 0;
@@ -29,110 +30,142 @@ body {
             margin-top: 10%;
         }
     .alert-hidden {
-        opacity: 0;
+        visibility: hidden;
     }
 
-    .current-info {
-        position: fixed;
-        opacity: 0;
-        top: 0;
-        left: 0;
-        width: 50%;
-        height: 100vh;
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        background-color: antiquewhite;
+    .weather-container {
+        visibility: hidden;
     }
-        .location {
-            font-size: 1.8rem;
-        }
-        .icon {
-            display: inline-block;
-            height: 4rem;
-            margin: 2rem;
-        }
-    .current-info-show {
-        opacity: 1;
+    .weather-container-show {
+        visibility: visible;
     }
+        .current-info {
+            position: fixed;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: auto;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            background-color: antiquewhite;
+        }
+            .location {
+                font-size: 1.8rem;
+            }
+            .icon {
+                display: inline-block;
+                height: 4rem;
+                margin: 2rem;
+            }
+        .current-info-show {
+            opacity: 1;
+        }
 
-        .temperature-section {
-            position: relative;
+            .temperature-section {
+                position: relative;
+            }
+                .degree-section {
+                    cursor: pointer;
+                    flex-direction: row;
+                    text-align: center;
+                }
+                    .temperature-degree {
+                        display: inline-block;
+                        font-size: 1.5rem;
+                    }
+                    .temperature-section span {
+                        font-size: 1.5rem;
+                    }
+                .temperature-description {
+                    font-size: 1.2rem;
+                    margin: 1rem;
+                }
+        
+        .details {
+            position: absolute;
+            opacity: 0;
+            right: 0;
+            top: 0;
+            width: 50%;
+            height: auto;
+            min-height: 100vh;
+            padding: 2rem 2rem 4rem 2rem;
+            color: rgb(72, 60, 100);
+            background-color: #FFADA0;
         }
-            .degree-section {
-                cursor: pointer;
-                flex-direction: row;
+            .details-title {
+                margin: 2rem;
+                font-size: 1.8rem;
                 text-align: center;
             }
-                .temperature-degree {
-                    display: inline-block;
-                    font-size: 1.5rem;
-                }
-                .temperature-section span {
-                    font-size: 1.5rem;
-                }
-            .temperature-description {
-                font-size: 1.2rem;
+            .details > div {
                 margin: 1rem;
+                font-size: 1.1rem;
             }
-    
-    .details {
-        position: absolute;
-        overflow-y: scroll;
-        opacity: 0;
-        right: 0;
-        top: 0;
-        width: 50%;
-        height: auto;
-        min-height: 100vh;
-        padding: 2rem 2rem 4rem 2rem;
-        color: rgb(72, 60, 100);
-        background-color: #FFADA0;
-    }
-        .details-title {
-            margin: 2rem;
-            font-size: 1.8rem;
-            text-align: center;
-        }
-        .details > div {
-            margin: 1rem;
-            font-size: 1.1rem;
-        }
-            .current-details > p {
-                margin: 1.5rem;
-                font-size: 1rem;
-            }
-            .hourly p {
-                margin: 1.5rem 0 1.5rem 1.5rem;
-                font-size: 1rem;
-            }
-            .daily p {
-                margin: 1.5rem 0 1.5rem 1.5rem;
-                font-size: 1rem;
-            }
+                .current-details > p {
+                    margin: 1.5rem;
+                    font-size: 1rem;
+                }
+                .hourly p {
+                    margin: 1.5rem 0 1.5rem 1.5rem;
+                    font-size: 1rem;
+                }
+                .daily p {
+                    margin: 1.5rem 0 1.5rem 1.5rem;
+                    font-size: 1rem;
+                }
 
-    .details-show {
-        opacity: 1;
-    }
+        .details-show {
+            opacity: 1;
+        }
+
+        .hint {
+            position: fixed;
+            opacity: 0;
+            left: 2rem;
+            bottom: 2rem;
+            border-radius: 25px;
+            background-color: #352B4A;
+            width: 280px;
+            padding: 1rem;
+            font-size: 1rem;
+            line-height: 1.8rem;
+            transition: all 300ms ease-in-out;
+        }
+            .gotIt {
+                margin-top: 1rem;
+                text-align: center;
+                border: solid 0.1rem #FFADA0;
+                transition: all 300ms ease-in-out;
+            }
+            .gotIt:hover {
+                background-color: #FFADA0;
+                color: #352B4A;
+                cursor: pointer;
+            }
+        .hint-show {
+            opacity: 1;
+        }
 
 
 @media only screen and (max-width: 1000px) {
-}
-@media only screen and (max-width: 430px) {
-    .location-timezone {
-        font-size: 1.2em;
+    .weather-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
     }
-    .degree-section span {
-        font-size: 1em;
+    .current-info {
+        position: relative;
+        width:100%;
+        left: 0;
     }
-    .degree-section h2 {
-        font-size: 1em;
+    .details {
+        position: relative;
+        width:100%;
     }
-    .icon {
-        height: 2em;
-    }
-    /* .temperature-description {
-        font-size: 0.7em;
-    } */
 }

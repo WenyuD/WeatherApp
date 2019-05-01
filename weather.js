@@ -1,7 +1,9 @@
-window.addEventListener('load', ()=> {
+window.addEventListener('load', () => {
     let long;
     let lat;
     let alert = document.querySelector('.alert');
+    let weatherContainer = document.querySelector('.weather-container');
+    let hint = document.querySelector('.hint');
 
     let currentInfo = document.querySelector('.current-info');
     let temperatureDescription = document.querySelector('.temperature-description');
@@ -24,27 +26,29 @@ window.addEventListener('load', ()=> {
     console.log(window.innerWidth);
 
 
-    if(navigator.geolocation) {
+    if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
             long = position.coords.longitude;
             lat = position.coords.latitude;
-            alert.textContent = "";
+            alert.classList.add('alert-hidden');
+            weatherContainer.classList.add('weather-container-show');
             currentInfo.classList.add('current-info-show');
             details.classList.add('details-show');
+            hint.classList.add('hint-show');
 
             const proxy = "https://cors-anywhere.herokuapp.com/";
             const api = `${proxy}https://api.darksky.net/forecast/4ee3ec5fc9565d3b10bfbc4a56dd6073/${lat},${long}`;
             const GoogleApi = `${proxy}https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&location_type=APPROXIMATE&result_type=locality&key=AIzaSyDRKPPmc5aNaAA562fVLMpduAHrf8MzF24`;
             console.log(api);
 
-            
+
             fetch(api)
-                .then(response =>{
+                .then(response => {
                     return response.json();
                 })
                 .then(data => {
                     console.log(data);
-                    const {temperature, summary, icon, cloudCover, humidity, ozone, pressure, uvIndex, visibility, windSpeed} = data.currently;
+                    const { temperature, summary, icon, cloudCover, humidity, ozone, pressure, uvIndex, visibility, windSpeed } = data.currently;
                     let nextHourSummary = data.hourly.summary;
                     let nextDaySummary = data.daily.summary;
 
@@ -61,7 +65,7 @@ window.addEventListener('load', ()=> {
                     //Change Unit to Celcius/Farenheit
                     temperatureSpan.textContent = "°F";
                     degreeSection.addEventListener('click', () => {
-                        if(temperatureSpan.textContent === "°F") {
+                        if (temperatureSpan.textContent === "°F") {
                             temperatureSpan.textContent = "°C";
                             temperatureDegree.textContent = Math.round(celsius);
                         } else {
@@ -80,18 +84,18 @@ window.addEventListener('load', ()=> {
                     uvIndexSpan.textContent = uvIndex;
                     visibilitySpan.textContent = visibility;
                     windSpeedSpan.textContent = windSpeed;
-                    
+
                     //Next Hour Details
                     hourlySummary.textContent = nextHourSummary;
                     dailySummary.textContent = nextDaySummary;
                 })
             fetch(GoogleApi)
-                .then(responseCity =>{
+                .then(responseCity => {
                     return responseCity.json();
                 })
                 .then(cityName => {
-                    const {formatted_address} = cityName.results[0];
-                    
+                    const { formatted_address } = cityName.results[0];
+
                     //Set DOM Elements from the API
                     location.textContent = formatted_address;
                 })
@@ -100,7 +104,7 @@ window.addEventListener('load', ()=> {
     }
 
     function setIcons(icon, iconID) {
-        const skycons = new Skycons({color: "#FFADA0"});
+        const skycons = new Skycons({ color: "#FFADA0" });
         const currentIcon = icon.replace(/-/g, "_").toUpperCase();
         skycons.play();
         return skycons.set(iconID, Skycons[currentIcon]);
